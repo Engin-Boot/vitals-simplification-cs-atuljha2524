@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+namespace checker
+{
     public class Vitals
     {
         public IChecker obj;
@@ -51,4 +52,4 @@ using System.Threading.Tasks;
             return true;
         }
     }
-
+}
