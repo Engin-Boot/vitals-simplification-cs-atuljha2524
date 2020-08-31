@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VitalSimplification
-{
+
     class VitalsChecker
     {
         public Vitals vit = new Vitals();
@@ -53,4 +52,4 @@ namespace VitalSimplification
             Console.WriteLine("All ok");
         }
     }
-}
+
