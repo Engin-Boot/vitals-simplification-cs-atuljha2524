@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+namespace checker
+{
     class VitalsChecker
     {
         public Vitals vit = new Vitals();
@@ -52,4 +53,4 @@ using System.Threading.Tasks;
             Console.WriteLine("All ok");
         }
     }
-
+}
