@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VitalSimplification
-{
+
     public class Vitals
     {
         public IChecker obj;
@@ -53,5 +52,3 @@ namespace VitalSimplification
         }
     }
 
-    
-}
