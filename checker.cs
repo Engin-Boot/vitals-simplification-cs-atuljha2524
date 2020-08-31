@@ -1,34 +1,59 @@
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-class Checker
+namespace checker
 {
-    static bool vitalsAreOk(float bpm, float spo2, float respRate) {
-        if(bpm < 70 || bpm > 150) {
-            return false;
-        } else if(spo2 < 90) {
-            return false;
-        } else if(respRate < 30 || respRate > 95) {
-            return false;
-        }
-        return true;
-    }
-    static void ExpectTrue(bool expression) {
-        if(!expression) {
-            Console.WriteLine("Expected true, but got false");
-            Environment.Exit(1);
-        }
-    }
-    static void ExpectFalse(bool expression) {
-        if(expression) {
-            Console.WriteLine("Expected false, but got true");
-            Environment.Exit(1);
+    class VitalsChecker
+    {
+        public Vitals vit = new Vitals();
+        public bool VitalsAreOk(float bpm, float spo2, float respRate) {
+            bool checkBPM;
+            bool checkSpo2;
+            bool checkRespRate;
+            IChecker o1 = new BPMChecker();
+            IChecker o2 = new Spo2Checker();
+            IChecker o3 = new RespRateChecker();
+            vit.SetIChecker(o1);
+            checkBPM = vit.obj.Check(bpm);
+            vit.SetIChecker(o2);
+            checkSpo2 = vit.obj.Check(spo2);
+            vit.SetIChecker(o3);
+            checkRespRate = vit.obj.Check(respRate);
+            return checkBPM && checkRespRate && checkSpo2;
         }
     }
-    static int Main() {
-        ExpectTrue(vitalsAreOk(100, 95, 60));
-        ExpectFalse(vitalsAreOk(40, 91, 92));
-        Console.WriteLine("All ok");
-        return 0;
+
+    class Program
+    {
+        static void ExpectTrue(bool expression)
+        {
+            if (!expression)
+            {
+                Console.WriteLine("Expected true, but got false");
+                Environment.Exit(1);
+            }
+        }
+        static void ExpectFalse(bool expression)
+        {
+            if (expression)
+            {
+                Console.WriteLine("Expected false, but got true");
+                Environment.Exit(1);
+            }
+        }
+        static void Main(string[] args)
+        {
+            VitalsChecker v1 = new VitalsChecker();
+            ExpectTrue(v1.VitalsAreOk(100, 95, 60));
+            ExpectTrue(v1.VitalsAreOk(90, 100, 40));
+            ExpectTrue(v1.VitalsAreOk(100, 150, 90));
+            ExpectFalse(v1.VitalsAreOk(40, 91, 92));
+            ExpectFalse(v1.VitalsAreOk(100, 89, 92));
+            ExpectFalse(v1.VitalsAreOk(100, 91, 100));
+            Console.WriteLine("All ok");
+        }
     }
 }
