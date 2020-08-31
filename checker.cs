@@ -36,7 +36,6 @@ namespace checker
                 Environment.Exit(1);
             }
         }
-
         static void ExpectFalse(bool expression)
         {
             if (expression)
