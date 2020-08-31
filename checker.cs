@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace VitalSimplification
 {
-    class Program
+    class VitalsChecker
     {
-        static Vitals vit;
-        static bool VitalsAreOk(float bpm, float spo2, float respRate) {
+        public Vitals vit = new Vitals();
+        public bool VitalsAreOk(float bpm, float spo2, float respRate) {
             bool checkBPM;
             bool checkSpo2;
             bool checkRespRate;
@@ -24,7 +24,10 @@ namespace VitalSimplification
             checkRespRate = vit.obj.Check(respRate);
             return checkBPM && checkRespRate && checkSpo2;
         }
+    }
 
+    class Program
+    {
         static void ExpectTrue(bool expression)
         {
             if (!expression)
@@ -44,8 +47,9 @@ namespace VitalSimplification
         }
         static void Main(string[] args)
         {
-            ExpectTrue(VitalsAreOk(100, 95, 60));
-            ExpectFalse(VitalsAreOk(40, 91, 92));
+            VitalsChecker v1 = new VitalsChecker();
+            ExpectTrue(v1.VitalsAreOk(100, 95, 60));
+            ExpectFalse(v1.VitalsAreOk(40, 91, 92));
             Console.WriteLine("All ok");
         }
     }
