@@ -48,7 +48,11 @@ namespace checker
         {
             VitalsChecker v1 = new VitalsChecker();
             ExpectTrue(v1.VitalsAreOk(100, 95, 60));
+            ExpectTrue(v1.VitalsAreOk(90, 100, 40));
+            ExpectTrue(v1.VitalsAreOk(100, 150, 90));
             ExpectFalse(v1.VitalsAreOk(40, 91, 92));
+            ExpectFalse(v1.VitalsAreOk(100, 89, 92));
+            ExpectFalse(v1.VitalsAreOk(100, 91, 100));
             Console.WriteLine("All ok");
         }
     }
